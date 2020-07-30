@@ -26,11 +26,12 @@ describe('CTBS head and H1 test', () => {
 
 
 describe('screenshots', () => {
+     it('screenies', function () {
       cy.viewport('ipad-mini')
       cy.screenshot('iphone-6+')
       cy.wait(200)
       cy.viewport('iphone-6+')
       cy.screenshot('iphone-6+')
       cy.wait(200)
-   
+     })
 })
