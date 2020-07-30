@@ -8,3 +8,18 @@ describe('CTBS head and H1 test', () => {
   })
 
 })
+  context('Location', function () {
+           beforeEach(function () {
+              cy.visit('https://www.connecticutbasementsystems.com')
+           })
+
+           it('cy.hash() - get the current URL hash', function () {
+              cy.hash().should('be.empty')
+           })
+
+           it('cy.location() - get window.location', function () {
+              cy.location().should(function (location) {
+                 expect(location.search).to.be.empty
+              })
+             })
+       })
