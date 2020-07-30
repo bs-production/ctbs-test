@@ -17,8 +17,14 @@ jobs:
          npm install;
       - name: Cypress run
         uses: cypress-io/github-action@v2
+      - uses: actions/upload-artifact@v1
+        if: failure()
         with:
-          record: true
-        env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          name: cypress-screenshots
+          path: cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
