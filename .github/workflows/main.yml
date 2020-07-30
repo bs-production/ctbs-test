@@ -1,0 +1,19 @@
+name: End-to-end tests
+on: [push]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+         version: 10.x
+      - name: npm install, build, and test
+        run: 
+         npm install;
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
