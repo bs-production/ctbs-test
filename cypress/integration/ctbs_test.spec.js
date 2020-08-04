@@ -1,37 +1,23 @@
 describe('CTBS head and H1 test', () => {
   it('Check for title, description, H1', () => {
    cy.visit('https://www.connecticutbasementsystems.com');
-   cy.title().should('eq', 'Basement Waterproofing in CT')
-   cy.get('h1').should('be.visible')
-   cy.get('head meta[name="description"]')
-   .should("have.attr", "content", "Connecticut Basement Systems waterproofs wet basements and crawl spaces. Get our Free cost estimates in Stamford, Norwalk, West Hartford and the nearby areas.");
+   cy.title().should('be.visible');
+   cy.get('h1').should('be.visible');
+   cy.get('head meta[name="description"]').should('be.visible');
   })
 
 })
-  context('Location', function () {
-           beforeEach(function () {
-              cy.visit('https://www.connecticutbasementsystems.com')
-           })
 
-           it('cy.hash() - get the current URL hash', function () {
-              cy.hash().should('be.empty')
-           })
+describe('Basic Data Layer Checks', () => {
+  it('has a dataLayer and loads GTM', () => {
+    cy.visit('https://www.connecticutbasementsystems.com')
+    cy.window().then((window) => {
+      assert.isDefined(window.dataLayer, 
+        'window.dataLayer is defined');
 
-           it('cy.location() - get window.location', function () {
-              cy.location().should(function (location) {
-                 expect(location.search).to.be.empty
-              })
-             })
-       })
-
-
-describe('screenshots', () => {
-     it('screenies', function () {
-      cy.viewport('ipad-mini')
-      cy.screenshot('iphone-6+')
-      cy.wait(200)
-      cy.viewport('iphone-6+')
-      cy.screenshot('iphone-6+')
-      cy.wait(200)
-     })
-})
+      assert.isDefined(
+        window.dataLayer.find(x => x.event === "gtm.js"), 
+        "GTM is loaded");
+    })
+  });
+});
