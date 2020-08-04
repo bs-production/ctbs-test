@@ -16,8 +16,8 @@ jobs:
       uses: jakejarvis/lighthouse-action@master
       with:
         url: 'https://www.connecticutbasementsystems.com/'
-    - name: Upload results to repo
-      uses: stefanzweifel/git-auto-commit-action@v4
+    - name: Upload results as an artifact
+      uses: actions/upload-artifact@master
       with:
-        commit_message: new lighthouse test
-
+        name: report
+        path: './report'
