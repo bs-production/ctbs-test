@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
     inputs:
       logLevel:
-        description: 'Log level'     
-        required: true
+        description: 'Log'     
+        required: false
         default: 'warning'
       tags:
         description: 'Test scenario tags'  
@@ -16,8 +16,8 @@ jobs:
       uses: jakejarvis/lighthouse-action@master
       with:
         url: 'https://www.connecticutbasementsystems.com/'
-    - name: Upload results as an artifact
-      uses: actions/upload-artifact@master
+    - name: Upload results to repo
+      uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        name: report
-        path: './report'
+        commit_message: new lighthouse test
+
