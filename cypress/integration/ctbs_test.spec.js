@@ -1,7 +1,6 @@
 describe('CTBS head and H1 test', () => {
   it('Check for title, description, H1', () => {
    cy.visit('https://www.connecticutbasementsystems.com');
-   cy.title().should('be.visible');
    cy.get('h1').should('be.visible');
    cy.get('head meta[name="description"]').should('be.visible');
   })
